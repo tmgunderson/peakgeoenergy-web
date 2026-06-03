@@ -130,12 +130,12 @@ export default function PeoplePage() {
               <div className={`h-1.5 bg-gradient-to-r ${person.color}`} />
 
               {/* Photo */}
-              <div className="relative w-full h-56 overflow-hidden bg-[#0a1628]">
+              <div className="relative w-full h-72 overflow-hidden bg-[#0a1628]">
                 <Image
                   src={person.photo}
                   alt={person.name}
                   fill
-                  className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
                 {/* Subtle gradient at bottom of photo */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d1f38]/80 via-transparent to-transparent" />

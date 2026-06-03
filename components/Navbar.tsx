@@ -41,9 +41,9 @@ export default function Navbar() {
           <Image
             src="/images/PEAK-Geothermal-Energy-full-white-logo-on-transparent-512-wide.png"
             alt="PEAK Geothermal Energy"
-            width={160}
-            height={48}
-            className="h-10 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            width={320}
+            height={96}
+            className="h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
           />
         </Link>
 
