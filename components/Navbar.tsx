@@ -27,24 +27,37 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // On pages with photo heroes the navbar starts transparent over the dark photo
+  const isPhotoHero = ['/', '/about', '/people'].includes(pathname);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#050d1a]/95 backdrop-blur-xl border-b border-white/5 shadow-2xl'
-          : 'bg-transparent'
+          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm'
+          : isPhotoHero
+          ? 'bg-transparent'
+          : 'bg-white/80 backdrop-blur-md border-b border-slate-100'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
-        {/* Logo */}
+        {/* Logo — white version on dark hero, colour version on light bg */}
         <Link href="/" className="flex items-center group">
-          <Image
-            src="/images/PEAK-Geothermal-Energy-full-white-logo-on-transparent-512-wide.png"
-            alt="PEAK Geothermal Energy"
-            width={320}
-            height={96}
-            className="h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-          />
+          {scrolled || !isPhotoHero ? (
+            <Image
+              src="/images/PEAK-Geothermal-Energy-full-logo-on-transparent.png"
+              alt="PEAK Geothermal Energy"
+              width={320} height={96}
+              className="h-20 w-auto object-contain group-hover:opacity-80 transition-opacity duration-300"
+            />
+          ) : (
+            <Image
+              src="/images/PEAK-Geothermal-Energy-full-white-logo-on-transparent-512-wide.png"
+              alt="PEAK Geothermal Energy"
+              width={320} height={96}
+              className="h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          )}
         </Link>
 
         {/* Desktop nav */}
@@ -54,7 +67,11 @@ export default function Navbar() {
               key={href}
               href={href}
               className={`nav-link text-sm font-medium transition-colors duration-300 ${
-                pathname === href ? 'text-geo-orange active' : 'text-gray-300 hover:text-white'
+                pathname === href
+                  ? 'text-geo-orange active'
+                  : scrolled || !isPhotoHero
+                  ? 'text-slate-600 hover:text-slate-900'
+                  : 'text-gray-200 hover:text-white'
               }`}
             >
               {label}
@@ -71,7 +88,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-gray-300 hover:text-white transition-colors"
+          className={`md:hidden transition-colors ${scrolled || !isPhotoHero ? 'text-slate-700 hover:text-slate-900' : 'text-gray-200 hover:text-white'}`}
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -80,27 +97,23 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden transition-all duration-300 overflow-hidden ${
-          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="bg-[#050d1a]/98 backdrop-blur-xl border-t border-white/5 px-6 py-4 space-y-1">
+      <div className={`md:hidden transition-all duration-300 overflow-hidden ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="bg-white border-t border-slate-100 px-6 py-4 space-y-1 shadow-lg">
           {links.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               className={`block py-3 px-4 rounded-lg text-sm font-medium transition-all ${
                 pathname === href
-                  ? 'text-geo-orange bg-geo-orange/10'
-                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+                  ? 'text-geo-orange bg-orange-50'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {label}
             </Link>
           ))}
           <div className="pt-2">
-            <Link href="/contact" className="btn-primary text-sm block text-center">
+            <Link href="/contact" className="btn-primary text-sm w-full justify-center">
               Get in Touch
             </Link>
           </div>
