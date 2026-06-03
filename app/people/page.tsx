@@ -20,6 +20,7 @@ const leaders = [
   {
     name: 'Craig Dunn', credentials: 'BSc', title: 'Chief Executive Officer',
     photo: '/images/cropped-cropped-Headshot-Craig-Dunn-2018-scaled-1.jpg',
+    linkedin: 'https://www.linkedin.com/in/craigdunncalgary/',
     color: 'from-orange-500 to-amber-500',
     bio: '25+ years of expertise in natural resource exploration and geoscience. Recognized for sustainability focus and low-impact technology development. President of WellDunn Consulting Ltd., Director of Terrador Energy, and E&Y Entrepreneur of the Year Finalist in 2016.',
     tags: ['Geoscience', 'Sustainability', 'Leadership'],
@@ -27,6 +28,7 @@ const leaders = [
   {
     name: 'TM Gunderson', credentials: 'P.Eng, CPA', title: 'Chief Operating Officer',
     photo: '/images/TM4.jpg',
+    linkedin: 'https://www.linkedin.com/in/t-m-gunderson-5599208/',
     color: 'from-teal-500 to-cyan-500',
     bio: 'Engineer with 20 years building successful firms across energy and agriculture. Pioneer in sustainable inland shrimp farming. Holds M.Sc. in Engineering, CPA designation, and is a registered professional engineer in both Canada and the USA.',
     tags: ['Engineering', 'Operations', 'Finance'],
@@ -34,6 +36,7 @@ const leaders = [
   {
     name: 'Doug McNeill', credentials: 'P.Eng, ICD', title: 'Chairman',
     photo: '/images/Doug_McNeill2.webp',
+    linkedin: 'https://www.linkedin.com/in/doug-mcneill-7b338134/',
     color: 'from-purple-500 to-indigo-500',
     bio: 'Founding Partner of Epoch Energy with 30+ years of energy industry experience. B.Sc. in Mechanical Engineering, Corporate Governance College graduate. President of JTK Resources Inc., former CSO of The Stream-Flo Group, and board member of Canadian Energy & Climate Nexus.',
     tags: ['Governance', 'Energy', 'Strategy'],
@@ -41,6 +44,7 @@ const leaders = [
   {
     name: 'Michael Wellwood', credentials: 'BSc, CPEP', title: 'Chief Financial Officer',
     photo: '/images/cropped-Mike-Wellwood-Headshot-at-WeWork4.png',
+    linkedin: 'https://www.linkedin.com/in/michaelwellwood/',
     color: 'from-green-500 to-emerald-500',
     bio: '20+ years in private capital markets, domestic and international structuring. Certified Private Equity Professional, former Chairman of the National Exempt Market Association Due Diligence Committee, and founder of an Exempt Market Dealer in Alberta.',
     tags: ['Capital Markets', 'Structuring', 'Private Equity'],
@@ -48,6 +52,7 @@ const leaders = [
   {
     name: 'Peter K. Braxton', credentials: '', title: 'Managing Director',
     photo: '/images/cropped-Peter-Braxton-Headshot-300x300.png',
+    linkedin: 'https://www.linkedin.com/in/peterkbraxton/',
     color: 'from-rose-500 to-pink-500',
     bio: '17+ years in investor relations, capital formation, and syndication. Advises on structuring, fundraising, and operations across the private capital sector — bringing a deep network of institutional and accredited investors to PEAK.',
     tags: ['Investor Relations', 'Capital Formation', 'Syndication'],
@@ -55,6 +60,7 @@ const leaders = [
   {
     name: 'Monte Morrison', credentials: 'PE, EMT', title: 'CEO — PEAK USA',
     photo: '/images/Monte_Morrison2.jpg',
+    linkedin: 'https://www.linkedin.com/in/monte-morrison-pe-asp-emt-6b03216/',
     color: 'from-orange-600 to-red-500',
     bio: "35+ years managing geothermal power plants and well fields across Nevada, California, Hawaii, Utah, and New Mexico. Board member of Geothermal Rising, the industry's premier advocacy organization.",
     tags: ['Geothermal Ops', 'Nevada', 'Well Fields'],
@@ -127,9 +133,11 @@ export default function PeoplePage() {
                         {person.title}
                       </div>
                     </div>
-                    <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-all cursor-pointer flex-shrink-0 ml-2">
-                      <Linkedin size={13} className="text-slate-400" />
-                    </div>
+                    <a href={person.linkedin} target="_blank" rel="noreferrer"
+                      className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#0077b5] hover:border-[#0077b5] transition-all flex-shrink-0 ml-2 group"
+                      aria-label={`${person.name} on LinkedIn`}>
+                      <Linkedin size={13} className="text-slate-400 group-hover:text-white transition-colors" />
+                    </a>
                   </div>
 
                   <div className="my-4 h-px bg-slate-100" />
