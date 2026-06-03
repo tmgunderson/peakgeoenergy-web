@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Zap, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -19,14 +20,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-geo-orange to-geo-amber flex items-center justify-center">
-                <Zap size={18} className="text-white" fill="white" />
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">PEAK</div>
-                <div className="text-gray-500 text-[10px] tracking-[0.2em] uppercase -mt-0.5">Geothermal Energy</div>
-              </div>
+            <div className="mb-5">
+              <Image
+                src="/images/PEAK-Geothermal-Energy-full-white-logo-on-transparent-512-wide.png"
+                alt="PEAK Geothermal Energy"
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain"
+              />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
               Developing the planet&apos;s best renewable energy resources. An Alberta, Canada corporation.
