@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Zap, Globe, TrendingUp, Leaf, ChevronDown } from 'lucide-react';
 
 function useReveal() {
@@ -20,6 +21,12 @@ const stats = [
   { value: '3', label: 'Countries Active', icon: Globe },
   { value: '25+', label: 'Years Experience', icon: TrendingUp },
   { value: '~0', label: 'GHG Emissions', icon: Leaf },
+];
+
+const locations = [
+  { name: 'Nevada, USA', flag: '🇺🇸', desc: 'Established geothermal corridor' },
+  { name: 'Chile', flag: '🇨🇱', desc: 'High-potential Andean resources' },
+  { name: 'Canada', flag: '🇨🇦', desc: 'Domestic energy development' },
 ];
 
 const services = [
@@ -43,30 +50,38 @@ const services = [
   },
 ];
 
-const locations = [
-  { name: 'Nevada, USA', flag: '🇺🇸', desc: 'Established geothermal corridor' },
-  { name: 'Chile', flag: '🇨🇱', desc: 'High-potential Andean resources' },
-  { name: 'Canada', flag: '🇨🇦', desc: 'Domestic energy development' },
-];
-
 export default function HomePage() {
   useReveal();
 
   return (
     <div className="animated-bg">
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center hero-grid overflow-hidden">
-        {/* Decorative orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-geo-orange/5 blur-3xl pointer-events-none animate-glow-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-geo-teal/5 blur-3xl pointer-events-none animate-glow-pulse" style={{ animationDelay: '1.5s' }} />
 
-        {/* Orbit rings */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] orbit-ring opacity-30 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] orbit-ring opacity-20 pointer-events-none" style={{ animationDirection: 'reverse', animationDuration: '15s' }} />
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Full-bleed background photo */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/pexels-fauxels-3184638.jpg"
+            alt="PEAK Geothermal team"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Dark overlay with gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/80 via-[#050d1a]/70 to-[#050d1a]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050d1a]/60 via-transparent to-[#050d1a]/40" />
+        </div>
+
+        {/* Hero grid overlay */}
+        <div className="absolute inset-0 hero-grid opacity-20 z-0" />
+
+        {/* Decorative orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-geo-orange/10 blur-3xl pointer-events-none animate-glow-pulse z-0" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-geo-teal/8 blur-3xl pointer-events-none animate-glow-pulse z-0" style={{ animationDelay: '1.5s' }} />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-geo-orange/30 bg-geo-orange/10 text-geo-orange text-sm font-medium mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-geo-orange/40 bg-geo-orange/10 backdrop-blur-sm text-geo-orange text-sm font-medium mb-8 animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-geo-orange animate-pulse" />
             Calgary, Alberta · Independent Sponsor
           </div>
@@ -82,7 +97,7 @@ export default function HomePage() {
             <span className="gradient-text-teal">Earth&apos;s Core</span>
           </h1>
 
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
             PEAK Geothermal Energy is a leading developer of geothermal energy solutions —
             harnessing renewable heat from beneath the Earth&apos;s surface to power a sustainable future.
           </p>
@@ -99,7 +114,7 @@ export default function HomePage() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 animate-float">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-400 animate-float z-10">
           <span className="text-xs tracking-widest uppercase">Scroll</span>
           <ChevronDown size={18} />
         </div>
@@ -148,7 +163,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Visual card */}
           <div className="reveal-right">
             <div className="relative">
               <div className="glass rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2">
@@ -166,16 +180,75 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              {/* Decorative glow */}
               <div className="absolute -inset-4 bg-gradient-to-r from-geo-orange/5 to-geo-teal/5 rounded-3xl blur-xl -z-10" />
             </div>
           </div>
         </div>
       </section>
 
+      {/* ── INFOGRAPHIC SECTION ── */}
+      <section className="relative overflow-hidden">
+        <div className="section-divider" />
+        <div className="py-24 max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Infographic image */}
+            <div className="reveal-left order-2 md:order-1">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+                <Image
+                  src="/images/Binary-Greenhouse-Geothermal-Infographic.jpg"
+                  alt="Binary Cycle Geothermal Energy Infographic"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050d1a]/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-xs text-gray-300 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                    Binary Cycle Geothermal Process
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="reveal-right order-1 md:order-2">
+              <div className="inline-block text-geo-teal text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-teal/10 px-3 py-1.5 rounded-full">
+                The Technology
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Clean Energy from<br />
+                <span className="gradient-text-teal">Deep Below</span>
+              </h2>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Binary cycle geothermal technology extracts thermal energy from underground reservoirs
+                and converts it into clean electricity — 24 hours a day, 365 days a year, with
+                near-zero greenhouse gas emissions.
+              </p>
+              <div className="space-y-3">
+                {[
+                  'No fuel costs — the Earth\'s heat is free and limitless',
+                  'Smallest land footprint of any baseload energy source',
+                  'Fully dispatchable — power on demand, unlike solar or wind',
+                  'Revenue from power sales, carbon credits & direct heat',
+                ].map((point) => (
+                  <div key={point} className="flex items-start gap-3 text-gray-300 text-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-geo-teal mt-1.5 flex-shrink-0" />
+                    {point}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8">
+                <Link href="/services" className="inline-flex items-center gap-2 text-geo-teal font-semibold hover:gap-3 transition-all duration-300">
+                  Explore Our Services <ArrowRight size={18} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="section-divider" />
+      </section>
+
       {/* ── SERVICES PREVIEW ── */}
       <section className="py-24 relative">
-        <div className="section-divider mb-24" />
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 reveal">
             <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 px-3 py-1.5 rounded-full">
@@ -208,7 +281,34 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="section-divider mt-24" />
+      </section>
+
+      {/* ── TEAM PHOTO BANNER ── */}
+      <section className="relative h-80 md:h-96 overflow-hidden reveal">
+        <Image
+          src="/images/pexels-fauxels-3184638.jpg"
+          alt="PEAK Geothermal team collaboration"
+          fill
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050d1a] via-[#050d1a]/60 to-[#050d1a]/40" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full">
+            <div className="max-w-lg">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                A World-Class Team<br />
+                <span className="gradient-text">Behind Every Project</span>
+              </h2>
+              <p className="text-gray-300 mb-6 text-sm leading-relaxed">
+                Our leadership team brings over 100 combined years of experience across geoscience,
+                engineering, capital markets, and geothermal operations.
+              </p>
+              <Link href="/people" className="btn-primary inline-flex items-center gap-2 text-sm">
+                Meet the Team <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ── CTA BANNER ── */}

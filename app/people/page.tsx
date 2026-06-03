@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Linkedin } from 'lucide-react';
 
 function useReveal() {
@@ -20,7 +21,7 @@ const leaders = [
     name: 'Craig Dunn',
     credentials: 'BSc',
     title: 'Chief Executive Officer',
-    initials: 'CD',
+    photo: '/images/cropped-cropped-Headshot-Craig-Dunn-2018-scaled-1.jpg',
     color: 'from-orange-500 to-amber-500',
     bio: '25+ years of expertise in natural resource exploration and geoscience. Recognized for sustainability focus and low-impact technology development. President of WellDunn Consulting Ltd., Director of Terrador Energy, and E&Y Entrepreneur of the Year Finalist in 2016.',
     tags: ['Geoscience', 'Sustainability', 'Leadership'],
@@ -29,7 +30,7 @@ const leaders = [
     name: 'TM Gunderson',
     credentials: 'P.Eng, CPA',
     title: 'Chief Operating Officer',
-    initials: 'TG',
+    photo: '/images/TM_Gunderson2.webp',
     color: 'from-teal-500 to-cyan-500',
     bio: 'Engineer with 20 years building successful firms across energy and agriculture. Pioneer in sustainable inland shrimp farming. Holds M.Sc. in Engineering, CPA designation, and is a registered professional engineer in both Canada and the USA.',
     tags: ['Engineering', 'Operations', 'Finance'],
@@ -38,7 +39,7 @@ const leaders = [
     name: 'Doug McNeill',
     credentials: 'P.Eng, ICD',
     title: 'Chairman',
-    initials: 'DM',
+    photo: '/images/Doug_McNeill2.webp',
     color: 'from-purple-500 to-indigo-500',
     bio: 'Founding Partner of Epoch Energy with 30+ years of energy industry experience. B.Sc. in Mechanical Engineering, Corporate Governance College graduate. President of JTK Resources Inc., former CSO of The Stream-Flo Group, and board member of Canadian Energy & Climate Nexus.',
     tags: ['Governance', 'Energy', 'Strategy'],
@@ -47,7 +48,7 @@ const leaders = [
     name: 'Michael Wellwood',
     credentials: 'BSc, CPEP',
     title: 'Chief Financial Officer',
-    initials: 'MW',
+    photo: '/images/cropped-Mike-Wellwood-Headshot-at-WeWork4.png',
     color: 'from-green-500 to-emerald-500',
     bio: '20+ years in private capital markets, domestic and international structuring. Certified Private Equity Professional, former Chairman of the National Exempt Market Association Due Diligence Committee, and founder of an Exempt Market Dealer in Alberta.',
     tags: ['Capital Markets', 'Structuring', 'Private Equity'],
@@ -56,7 +57,7 @@ const leaders = [
     name: 'Peter K. Braxton',
     credentials: '',
     title: 'Managing Director',
-    initials: 'PB',
+    photo: '/images/cropped-Peter-Braxton-Headshot-300x300.png',
     color: 'from-rose-500 to-pink-500',
     bio: '17+ years in investor relations, capital formation, and syndication. Advises on structuring, fundraising, and operations across the private capital sector — bringing a deep network of institutional and accredited investors to PEAK.',
     tags: ['Investor Relations', 'Capital Formation', 'Syndication'],
@@ -65,9 +66,9 @@ const leaders = [
     name: 'Monte Morrison',
     credentials: 'PE, EMT',
     title: 'CEO — PEAK USA',
-    initials: 'MM',
+    photo: '/images/Monte_Morrison2.jpg',
     color: 'from-orange-600 to-red-500',
-    bio: '35+ years managing geothermal power plants and well fields across Nevada, California, Hawaii, Utah, and New Mexico. Board member of Geothermal Rising, the industry\'s premier advocacy organization. The operational backbone of PEAK\'s US geothermal portfolio.',
+    bio: '35+ years managing geothermal power plants and well fields across Nevada, California, Hawaii, Utah, and New Mexico. Board member of Geothermal Rising, the industry\'s premier advocacy organization.',
     tags: ['Geothermal Ops', 'Nevada', 'Well Fields'],
   },
 ];
@@ -77,18 +78,31 @@ export default function PeoplePage() {
 
   return (
     <div className="animated-bg">
-      {/* ── PAGE HERO ── */}
-      <section className="page-hero pt-40 pb-24 relative overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-geo-teal/5 blur-3xl pointer-events-none" />
+
+      {/* ── PAGE HERO with team photo background ── */}
+      <section className="relative pt-40 pb-28 overflow-hidden">
+        {/* Background team photo */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/pexels-fauxels-3184638.jpg"
+            alt="PEAK Geothermal team"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/85 via-[#050d1a]/75 to-[#050d1a]" />
+          <div className="absolute inset-0 hero-grid opacity-20" />
+        </div>
+
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 px-3 py-1.5 rounded-full">
+          <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-geo-orange/20">
             Our Team
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
             The People Behind<br />
             <span className="gradient-text">PEAK</span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             A capable and highly experienced core team, augmented by best-in-class professionals
             across geoscience, engineering, capital markets, and operations.
           </p>
@@ -115,30 +129,42 @@ export default function PeoplePage() {
               {/* Top gradient bar */}
               <div className={`h-1.5 bg-gradient-to-r ${person.color}`} />
 
-              <div className="p-8">
-                {/* Avatar */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${person.color} flex items-center justify-center text-white font-black text-xl shadow-lg`}>
-                    {person.initials}
+              {/* Photo */}
+              <div className="relative w-full h-56 overflow-hidden bg-[#0a1628]">
+                <Image
+                  src={person.photo}
+                  alt={person.name}
+                  fill
+                  className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                />
+                {/* Subtle gradient at bottom of photo */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1f38]/80 via-transparent to-transparent" />
+              </div>
+
+              <div className="p-6">
+                {/* Name & title */}
+                <div className="flex items-start justify-between mb-1">
+                  <div>
+                    <h3 className="text-white font-bold text-lg leading-tight">
+                      {person.name}
+                      {person.credentials && (
+                        <span className="text-gray-500 font-normal text-sm ml-1">{person.credentials}</span>
+                      )}
+                    </h3>
+                    <div className={`text-sm font-semibold mt-0.5 bg-gradient-to-r ${person.color} bg-clip-text text-transparent`}>
+                      {person.title}
+                    </div>
                   </div>
-                  <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
-                    <Linkedin size={15} className="text-gray-400" />
+                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all cursor-pointer flex-shrink-0 ml-2">
+                    <Linkedin size={13} className="text-gray-400" />
                   </div>
                 </div>
 
-                {/* Name & title */}
-                <h3 className="text-white font-bold text-xl mb-0.5">
-                  {person.name}
-                  {person.credentials && (
-                    <span className="text-gray-500 font-normal text-sm ml-2">{person.credentials}</span>
-                  )}
-                </h3>
-                <div className={`text-sm font-semibold mb-4 bg-gradient-to-r ${person.color} bg-clip-text text-transparent`}>
-                  {person.title}
-                </div>
+                {/* Divider */}
+                <div className="my-4 h-px bg-white/5" />
 
                 {/* Bio */}
-                <p className="text-gray-400 text-sm leading-relaxed mb-5">{person.bio}</p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4">{person.bio}</p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
@@ -159,7 +185,7 @@ export default function PeoplePage() {
 
       <div className="section-divider" />
 
-      {/* ── VALUES STRIP ── */}
+      {/* ── STATS STRIP ── */}
       <section className="py-20 max-w-7xl mx-auto px-6">
         <div className="grid sm:grid-cols-3 gap-6 text-center">
           {[

@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -36,14 +37,14 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-geo-orange to-geo-amber flex items-center justify-center shadow-lg group-hover:shadow-orange-500/40 transition-shadow duration-300">
-            <Zap size={18} className="text-white" fill="white" />
-          </div>
-          <div className="leading-tight">
-            <div className="text-white font-bold text-lg tracking-wide">PEAK</div>
-            <div className="text-gray-400 text-[10px] tracking-[0.2em] uppercase font-medium -mt-0.5">Geothermal Energy</div>
-          </div>
+        <Link href="/" className="flex items-center group">
+          <Image
+            src="/images/PEAK-Geothermal-Energy-full-white-logo-on-transparent-512-wide.png"
+            alt="PEAK Geothermal Energy"
+            width={160}
+            height={48}
+            className="h-10 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          />
         </Link>
 
         {/* Desktop nav */}

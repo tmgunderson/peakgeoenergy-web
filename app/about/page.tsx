@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Target, Lightbulb, Leaf, Search, CheckCircle, DollarSign } from 'lucide-react';
 
 function useReveal() {
@@ -77,18 +78,33 @@ export default function AboutPage() {
 
   return (
     <div className="animated-bg">
+
       {/* ── PAGE HERO ── */}
-      <section className="page-hero pt-40 pb-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-geo-orange/5 blur-3xl pointer-events-none" />
+      <section className="relative pt-40 pb-28 overflow-hidden">
+        {/* Background: team photo with heavy overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/pexels-fauxels-3184638.jpg"
+            alt="PEAK Geothermal team"
+            fill
+            className="object-cover object-center scale-105"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/90 via-[#050d1a]/80 to-[#050d1a]" />
+          <div className="absolute inset-0 hero-grid opacity-15" />
+          {/* Orange radial glow */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-geo-orange/8 blur-3xl" />
+        </div>
+
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 px-3 py-1.5 rounded-full">
+          <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-geo-orange/20">
             About PEAK
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
             What Sets Us<br />
             <span className="gradient-text">Apart</span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             At PEAK Geothermal Energy, we are consistently striving to be a global leader in the field
             of geothermal development — driven by technology, sustainability, and a determination to
             make clean energy the world&apos;s primary power source.
@@ -130,10 +146,9 @@ export default function AboutPage() {
               three countries with a target generating capacity exceeding 100MW.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              We pride ourselves on our determination to develop new technology and sustainable energy
-              development that separates our organization from competitors. Our multidisciplinary team
-              of geoscientists, engineers, and capital markets professionals brings together decades of
-              experience across the energy sector.
+              Our multidisciplinary team of geoscientists, engineers, and capital markets professionals
+              brings together decades of experience across the energy sector, delivering projects from
+              resource identification through to long-term revenue generation.
             </p>
           </div>
           <div className="reveal-right space-y-4">
@@ -152,7 +167,7 @@ export default function AboutPage() {
 
       <div className="section-divider" />
 
-      {/* ── PROCESS ── */}
+      {/* ── INFOGRAPHIC + PROCESS side by side ── */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16 reveal">
           <div className="inline-block text-geo-orange text-xs font-semibold tracking-[0.25em] uppercase mb-4 bg-geo-orange/10 px-3 py-1.5 rounded-full">
@@ -162,31 +177,45 @@ export default function AboutPage() {
             From Discovery to<br />
             <span className="gradient-text">Delivery</span>
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
-            Our proven four-stage process takes geothermal projects from initial resource identification
-            through to revenue-generating power plants.
-          </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {process.map((step, i) => (
-            <div key={step.step} className={`reveal delay-${(i + 1) * 100} relative`}>
-              {/* Connector line */}
-              {i < process.length - 1 && (
-                <div className="hidden md:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-geo-orange/40 to-transparent z-10" />
-              )}
-              <div className="glass rounded-2xl p-6 h-full hover:border-geo-orange/30 transition-all duration-300 hover:-translate-y-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-geo-orange/40 font-black text-3xl leading-none">{step.step}</span>
-                  <div className="w-10 h-10 rounded-xl bg-geo-orange/10 border border-geo-orange/20 flex items-center justify-center">
-                    <step.icon size={18} className="text-geo-orange" />
-                  </div>
-                </div>
-                <h3 className="text-white font-bold mb-2">{step.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Infographic */}
+          <div className="reveal-left">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+              <Image
+                src="/images/Binary-Greenhouse-Geothermal-Infographic.jpg"
+                alt="Binary Cycle Geothermal Process"
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050d1a]/50 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <span className="text-xs text-gray-300 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                  Binary Cycle Geothermal Process
+                </span>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Process steps */}
+          <div className="space-y-4 reveal-right">
+            {process.map((step, i) => (
+              <div key={step.step} className={`glass rounded-xl p-6 flex gap-5 items-start delay-${(i + 1) * 100} hover:border-geo-orange/30 transition-all duration-300 hover:-translate-x-1`}>
+                <div className="flex-shrink-0 text-right">
+                  <span className="text-geo-orange/30 font-black text-2xl">{step.step}</span>
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-geo-orange/10 border border-geo-orange/20 flex items-center justify-center flex-shrink-0">
+                  <step.icon size={18} className="text-geo-orange" />
+                </div>
+                <div>
+                  <h3 className="text-white font-bold mb-1">{step.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
